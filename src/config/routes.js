@@ -1,9 +1,9 @@
-import Home from '../pages/Home';
-import Today from '../pages/Today';
-import Tasks from '../pages/Tasks';
-import Meetings from '../pages/Meetings';
-import Team from '../pages/Team';
-import NotFound from '../pages/NotFound';
+import HomePage from '@/components/pages/HomePage';
+import TodayPage from '@/components/pages/TodayPage';
+import TasksPage from '@/components/pages/TasksPage';
+import MeetingsPage from '@/components/pages/MeetingsPage';
+import TeamPage from '@/components/pages/TeamPage';
+import NotFoundPage from '@/components/pages/NotFoundPage';
 
 export const routes = {
   home: {
@@ -11,41 +11,41 @@ export const routes = {
     label: 'Today',
     path: '/',
     icon: 'Calendar',
-    component: Home
+component: HomePage
   },
   today: {
     id: 'today',
     label: 'Today',
     path: '/today',
     icon: 'Calendar',
-    component: Today
+component: TodayPage
   },
   tasks: {
     id: 'tasks',
     label: 'Tasks',
     path: '/tasks',
     icon: 'CheckSquare',
-    component: Tasks
+component: TasksPage
   },
   meetings: {
     id: 'meetings',
     label: 'Meetings',
     path: '/meetings',
     icon: 'Video',
-    component: Meetings
+component: MeetingsPage
   },
   team: {
     id: 'team',
     label: 'Team',
     path: '/team',
     icon: 'Users',
-    component: Team
+component: TeamPage
   },
   notFound: {
     id: 'notFound',
     label: 'Not Found',
     path: '/404',
-    component: NotFound
+component: NotFoundPage
   }
 };
 

@@ -1,8 +1,10 @@
+import React from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import ApperIcon from '../components/ApperIcon';
+import ApperIcon from '@/components/ApperIcon';
+import Button from '@/components/atoms/Button';
 
-const NotFound = () => {
+const NotFoundPage = () => {
   const navigate = useNavigate();
 
   return (
@@ -24,23 +26,20 @@ const NotFound = () => {
           </p>
           
           <div className="space-y-4">
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => navigate('/today')}
-              className="w-full bg-primary text-white px-6 py-3 rounded-lg hover:bg-secondary transition-colors"
+            <Button 
+                onClick={() => navigate('/today')}
+                variant="primary"
+                className="w-full"
             >
-              Go to Today
-            </motion.button>
-            
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => navigate(-1)}
-              className="w-full border border-surface-300 text-surface-700 px-6 py-3 rounded-lg hover:bg-surface-50 transition-colors"
+                Go to Today
+            </Button>
+            <Button
+                onClick={() => navigate(-1)}
+                variant="outline"
+                className="w-full"
             >
-              Go Back
-            </motion.button>
+                Go Back
+            </Button>
           </div>
         </motion.div>
       </div>
@@ -48,4 +47,4 @@ const NotFound = () => {
   );
 };
 
-export default NotFound;
+export default NotFoundPage;
