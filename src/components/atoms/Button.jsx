@@ -79,7 +79,7 @@ Button.propTypes = {
     onClick: PropTypes.func,
     className: PropTypes.string,
     variant: PropTypes.oneOf(['primary', 'secondary', 'outline', 'text', 'danger', 'ghost']),
-    icon: PropTypes.element,
+    icon: PropTypes.elementType,
     loading: PropTypes.bool,
     disabled: PropTypes.bool,
     type: PropTypes.oneOf(['button', 'submit', 'reset'])
