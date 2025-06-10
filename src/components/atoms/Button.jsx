@@ -4,12 +4,13 @@ import { motion } from 'framer-motion';
 
 const Button = ({ 
     children, 
-    onClick, 
+    onClick = undefined,
     className = '', 
     variant = 'primary', 
-    icon: Icon, 
+    icon: Icon = null, 
     loading = false,
     disabled = false,
+    type = 'button',
     ...props 
 }) => {
     let baseClasses = 'px-4 py-2 rounded-lg transition-all flex items-center justify-center space-x-2';
@@ -50,12 +51,12 @@ const Button = ({
         ...domProps 
     } = props;
 
-    // Combine disabled state from both loading and disabled props
+// Combine disabled state from both loading and disabled props
     const isDisabled = disabled || loading;
 
-return (
+    return (
         <motion.button
-            type={props.type || 'button'}
+            type={type}
             whileHover={{ scale: isDisabled ? 1 : 1.05 }}
             whileTap={{ scale: isDisabled ? 1 : 0.95 }}
             onClick={isDisabled ? undefined : onClick}
@@ -84,14 +85,5 @@ Button.propTypes = {
     type: PropTypes.oneOf(['button', 'submit', 'reset'])
 };
 
-Button.defaultProps = {
-    onClick: undefined,
-    className: '',
-    variant: 'primary',
-    icon: null,
-    loading: false,
-    disabled: false,
-    type: 'button'
-};
 
 export default Button;
