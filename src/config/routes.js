@@ -4,7 +4,8 @@ import TasksPage from '@/components/pages/TasksPage';
 import MeetingsPage from '@/components/pages/MeetingsPage';
 import TeamPage from '@/components/pages/TeamPage';
 import NotFoundPage from '@/components/pages/NotFoundPage';
-
+import LoginPage from '@/components/pages/LoginPage';
+import SignUpPage from '@/components/pages/SignUpPage';
 export const routes = {
   home: {
     id: 'home',
@@ -41,11 +42,23 @@ component: MeetingsPage
     icon: 'Users',
 component: TeamPage
   },
-  notFound: {
+notFound: {
     id: 'notFound',
     label: 'Not Found',
     path: '/404',
-component: NotFoundPage
+    component: NotFoundPage
+  },
+  login: {
+    id: 'login',
+    label: 'Login',
+    path: '/login',
+    component: LoginPage
+  },
+  signup: {
+    id: 'signup',
+    label: 'Sign Up',
+    path: '/signup',
+    component: SignUpPage
   }
 };
 

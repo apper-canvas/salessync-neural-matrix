@@ -12,7 +12,8 @@ const TaskEditorForm = ({ isOpen, onClose, editingTask, onSaveSuccess }) => {
         dueDate: '',
         category: 'Personal'
     });
-
+    const [loading, setLoading] = useState(false);
+    const [formErrors, setFormErrors] = useState({});
     const categories = ['Personal', 'Team', 'Client'];
 
     useEffect(() => {
@@ -31,23 +32,71 @@ const TaskEditorForm = ({ isOpen, onClose, editingTask, onSaveSuccess }) => {
                 category: 'Personal'
             });
         }
-    }, [editingTask]);
+}, [editingTask]);
+
+    const validateForm = () => {
+        const errors = {};
+        
+        if (!formData.title || formData.title.trim().length === 0) {
+            errors.title = 'Task title is required';
+        } else if (formData.title.trim().length < 3) {
+            errors.title = 'Task title must be at least 3 characters long';
+        }
+        
+        if (formData.dueDate) {
+            const selectedDate = new Date(formData.dueDate);
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            
+            if (selectedDate < today) {
+                errors.dueDate = 'Due date cannot be in the past';
+            }
+        }
+        
+        setFormErrors(errors);
+        return Object.keys(errors).length === 0;
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        
+        if (!validateForm()) {
+            toast.error('Please fix the form errors');
+            return;
+        }
+
+        setLoading(true);
         try {
+            const taskData = {
+                ...formData,
+                title: formData.title.trim(),
+                description: formData.description.trim()
+            };
+
             if (editingTask) {
-                const updatedTask = await TaskService.update(editingTask.id, formData);
+                const updatedTask = await TaskService.update(editingTask.id, taskData);
                 toast.success('Task updated successfully');
                 onSaveSuccess(updatedTask);
             } else {
-                const newTask = await TaskService.create(formData);
+                const newTask = await TaskService.create(taskData);
                 toast.success('Task created successfully');
                 onSaveSuccess(newTask);
             }
             onClose();
         } catch (err) {
-            toast.error('Failed to save task');
+            toast.error(err.message || 'Failed to save task');
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData(prev => ({ ...prev, [name]: value }));
+        
+        // Clear field error when user starts typing
+        if (formErrors[name]) {
+            setFormErrors(prev => ({ ...prev, [name]: '' }));
         }
     };
 
@@ -59,52 +108,75 @@ const TaskEditorForm = ({ isOpen, onClose, editingTask, onSaveSuccess }) => {
                 </h3>
                 
                 <form onSubmit={handleSubmit} className="space-y-4">
-                    <FormField
+<FormField
                         label="Title"
                         id="task-title"
+                        name="title"
                         type="text"
                         required
                         value={formData.title}
-                        onChange={(e) => setFormData({...formData, title: e.target.value})}
+                        onChange={handleChange}
+                        error={formErrors.title}
                         placeholder="Enter task title"
                     />
                     
-                    <FormField
+<FormField
                         label="Description"
                         id="task-description"
+                        name="description"
                         as="textarea"
                         value={formData.description}
-                        onChange={(e) => setFormData({...formData, description: e.target.value})}
+                        onChange={handleChange}
+                        error={formErrors.description}
                         placeholder="Add description (optional)"
                         rows="3"
                     />
                     
-                    <FormField
+<FormField
                         label="Due Date"
                         id="task-dueDate"
+                        name="dueDate"
                         type="date"
                         value={formData.dueDate}
-                        onChange={(e) => setFormData({...formData, dueDate: e.target.value})}
+                        onChange={handleChange}
+                        error={formErrors.dueDate}
                     />
                     
-                    <FormField
+<FormField
                         label="Category"
                         id="task-category"
+                        name="category"
                         as="select"
                         value={formData.category}
-                        onChange={(e) => setFormData({...formData, category: e.target.value})}
+                        onChange={handleChange}
+                        error={formErrors.category}
                     >
                         {categories.map(category => (
                             <option key={category} value={category}>{category}</option>
                         ))}
                     </FormField>
                     
-                    <div className="flex space-x-3 pt-4">
-                        <Button type="button" onClick={onClose} variant="outline" className="flex-1">
+<div className="flex space-x-3 pt-4">
+                        <Button 
+                            type="button" 
+                            onClick={onClose} 
+                            variant="outline" 
+                            className="flex-1"
+                            disabled={loading}
+                        >
                             Cancel
                         </Button>
-                        <Button type="submit" variant="primary" className="flex-1">
-                            {editingTask ? 'Update Task' : 'Create Task'}
+                        <Button 
+                            type="submit" 
+                            variant="primary" 
+                            className="flex-1"
+                            disabled={loading}
+                            loading={loading}
+                        >
+                            {loading 
+                                ? (editingTask ? 'Updating...' : 'Creating...')
+                                : (editingTask ? 'Update Task' : 'Create Task')
+                            }
                         </Button>
                     </div>
                 </form>
