@@ -3,7 +3,17 @@ import Input from '@/components/atoms/Input';
 import Select from '@/components/atoms/Select';
 import Textarea from '@/components/atoms/Textarea';
 
-const FormField = ({ label, id, type = 'text', children, className, required, as: Component = 'input', ...props }) => {
+const FormField = ({ 
+    label, 
+    id, 
+    type = 'text', 
+    children, 
+    className, 
+    required, 
+    error,
+    as: Component = 'input', 
+    ...props 
+}) => {
     let RenderedComponent;
     if (Component === 'input') {
         RenderedComponent = Input;
@@ -20,9 +30,18 @@ const FormField = ({ label, id, type = 'text', children, className, required, as
             <label htmlFor={id} className="block text-sm font-medium text-surface-700 mb-1">
                 {label} {required && '*'}
             </label>
-            <RenderedComponent id={id} type={type} required={required} {...props}>
+            <RenderedComponent 
+                id={id} 
+                type={type} 
+                required={required} 
+                error={error}
+                {...props}
+            >
                 {children}
             </RenderedComponent>
+            {error && RenderedComponent !== Input && (
+                <p className="mt-1 text-sm text-error">{error}</p>
+            )}
         </div>
     );
 };
