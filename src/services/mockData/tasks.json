@@ -1,0 +1,47 @@
+[
+  {
+    "id": "task-1",
+    "title": "Follow up with Acme Corp proposal",
+    "description": "Call to discuss pricing adjustments and timeline for Q1 implementation",
+    "dueDate": "2024-01-15",
+    "category": "Client",
+    "completed": false,
+    "createdAt": "2024-01-14T10:30:00Z"
+  },
+  {
+    "id": "task-2",
+    "title": "Prepare quarterly sales report",
+    "description": "Compile Q4 numbers and trend analysis for executive team presentation",
+    "dueDate": "2024-01-16",
+    "category": "Personal",
+    "completed": true,
+    "createdAt": "2024-01-12T14:20:00Z"
+  },
+  {
+    "id": "task-3",
+    "title": "Team standup agenda review",
+    "description": "Review talking points for Monday team meeting and quarterly goals",
+    "dueDate": "2024-01-15",
+    "category": "Team",
+    "completed": false,
+    "createdAt": "2024-01-14T16:45:00Z"
+  },
+  {
+    "id": "task-4",
+    "title": "Update CRM contact records",
+    "description": "Clean up duplicate entries and update contact information for key accounts",
+    "dueDate": "2024-01-17",
+    "category": "Personal",
+    "completed": false,
+    "createdAt": "2024-01-13T09:15:00Z"
+  },
+  {
+    "id": "task-5",
+    "title": "Schedule demo for TechStart Inc",
+    "description": "Coordinate product demonstration with their technical team and decision makers",
+    "dueDate": "2024-01-18",
+    "category": "Client",
+    "completed": false,
+    "createdAt": "2024-01-14T11:30:00Z"
+  }
+]

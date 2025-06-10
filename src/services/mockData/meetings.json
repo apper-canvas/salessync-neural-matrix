@@ -1,0 +1,42 @@
+[
+  {
+    "id": "meeting-1",
+    "title": "Weekly Sales Team Standup",
+    "date": "2024-01-15",
+    "time": "09:00",
+    "duration": 30,
+    "participants": ["team-1", "team-2", "team-3"],
+    "notes": "Review pipeline progress, discuss blockers, and align on weekly priorities. Focus on Q1 targets.",
+    "createdBy": "current-user"
+  },
+  {
+    "id": "meeting-2",
+    "title": "Client Discovery Call - Global Systems",
+    "date": "2024-01-16",
+    "time": "14:00",
+    "duration": 60,
+    "participants": ["team-2"],
+    "notes": "Initial needs assessment call. Focus on understanding their current pain points and integration requirements.",
+    "createdBy": "current-user"
+  },
+  {
+    "id": "meeting-3",
+    "title": "Product Demo - TechStart Inc",
+    "date": "2024-01-17",
+    "time": "11:00",
+    "duration": 45,
+    "participants": ["team-1", "team-4"],
+    "notes": "Demo core platform features. Prepare use cases specific to their industry vertical.",
+    "createdBy": "current-user"
+  },
+  {
+    "id": "meeting-4",
+    "title": "Quarterly Business Review",
+    "date": "2024-01-19",
+    "time": "15:00",
+    "duration": 90,
+    "participants": ["team-1", "team-2", "team-3", "team-4"],
+    "notes": "Q4 results analysis and Q1 planning session. Review team performance metrics and set objectives.",
+    "createdBy": "current-user"
+  }
+]
