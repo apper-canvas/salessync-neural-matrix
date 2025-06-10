@@ -7,7 +7,7 @@ const ProtectedRoute = ({ children }) => {
   const { isAuthenticated, loading } = useAuth();
   const location = useLocation();
 
-  if (loading) {
+if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <LoadingState>
@@ -16,10 +16,10 @@ const ProtectedRoute = ({ children }) => {
             <div className="h-4 bg-surface-100 rounded w-32 mx-auto"></div>
           </div>
         </LoadingState>
-      );
-    }
-
-  if (!isAuthenticated) {
+      </div>
+    );
+  }
+if (!isAuthenticated) {
     // Redirect to login page with return url
     return <Navigate to="/login" state={{ from: location }} replace />;
   }

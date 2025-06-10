@@ -107,8 +107,8 @@ const TaskEditorForm = ({ isOpen, onClose, editingTask, onSaveSuccess }) => {
                     {editingTask ? 'Edit Task' : 'Create New Task'}
                 </h3>
                 
-                <form onSubmit={handleSubmit} className="space-y-4">
-<FormField
+<form onSubmit={handleSubmit} className="space-y-4">
+                    <FormField
                         label="Title"
                         id="task-title"
                         name="title"
@@ -120,7 +120,7 @@ const TaskEditorForm = ({ isOpen, onClose, editingTask, onSaveSuccess }) => {
                         placeholder="Enter task title"
                     />
                     
-<FormField
+                    <FormField
                         label="Description"
                         id="task-description"
                         name="description"
@@ -132,7 +132,7 @@ const TaskEditorForm = ({ isOpen, onClose, editingTask, onSaveSuccess }) => {
                         rows="3"
                     />
                     
-<FormField
+                    <FormField
                         label="Due Date"
                         id="task-dueDate"
                         name="dueDate"
@@ -142,7 +142,7 @@ const TaskEditorForm = ({ isOpen, onClose, editingTask, onSaveSuccess }) => {
                         error={formErrors.dueDate}
                     />
                     
-<FormField
+                    <FormField
                         label="Category"
                         id="task-category"
                         name="category"
@@ -156,7 +156,7 @@ const TaskEditorForm = ({ isOpen, onClose, editingTask, onSaveSuccess }) => {
                         ))}
                     </FormField>
                     
-<div className="flex space-x-3 pt-4">
+                    <div className="flex space-x-3 pt-4">
                         <Button 
                             type="button" 
                             onClick={onClose} 
