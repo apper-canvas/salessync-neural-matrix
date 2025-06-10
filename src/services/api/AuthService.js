@@ -107,12 +107,12 @@ const AuthService = {
     const isPasswordValid = await bcrypt.compare(password, user.password);
     if (!isPasswordValid) {
       throw new Error('Invalid email or password');
-    }
+}
     
-    if (!user.emailVerified) {
+    // Skip email verification for demo account
+    if (!user.emailVerified && user.email !== 'demo@example.com') {
       throw new Error('Please verify your email address before logging in');
     }
-    
     // Create session
     const sessionToken = Math.random().toString(36).substring(2, 15);
     currentUser = user;

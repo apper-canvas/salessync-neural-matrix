@@ -92,10 +92,9 @@ const LoginPage = () => {
             Sign in to your account to continue
           </p>
         </div>
-
-        {/* Login Form */}
+{/* Login Form */}
         <div className="bg-white rounded-lg shadow-xl p-6">
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form onSubmit={handleSubmit} className="space-y-6" noValidate>
             {/* Email Field */}
             <FormField
               label="Email address"
@@ -108,6 +107,8 @@ const LoginPage = () => {
               error={formErrors.email}
               placeholder="Enter your email"
               icon={Mail}
+              aria-describedby={formErrors.email ? 'email-error' : undefined}
+              aria-invalid={!!formErrors.email}
             />
 
             {/* Password Field */}
@@ -123,16 +124,20 @@ const LoginPage = () => {
                 error={formErrors.password}
                 placeholder="Enter your password"
                 icon={Lock}
+                aria-describedby={formErrors.password ? 'password-error' : undefined}
+                aria-invalid={!!formErrors.password}
                 rightElement={
                   <button
                     type="button"
-                    className="p-2 text-surface-400 hover:text-surface-600 transition-colors"
+                    className="p-2 text-surface-400 hover:text-surface-600 focus:text-surface-600 focus:outline-none focus:ring-2 focus:ring-primary/20 rounded transition-colors"
                     onClick={() => setShowPassword(!showPassword)}
+                    aria-label={showPassword ? 'Hide password' : 'Show password'}
+                    tabIndex={0}
                   >
                     {showPassword ? (
-                      <EyeOff className="h-4 w-4" />
+                      <EyeOff className="h-4 w-4" aria-hidden="true" />
                     ) : (
-                      <Eye className="h-4 w-4" />
+                      <Eye className="h-4 w-4" aria-hidden="true" />
                     )}
                   </button>
                 }
@@ -141,7 +146,11 @@ const LoginPage = () => {
 
             {/* Global Error */}
             {error && (
-              <div className="bg-error/10 border border-error/20 rounded-lg p-3">
+              <div 
+                className="bg-error/10 border border-error/20 rounded-lg p-3"
+                role="alert"
+                aria-live="polite"
+              >
                 <p className="text-sm text-error font-medium">{error}</p>
               </div>
             )}
@@ -150,17 +159,24 @@ const LoginPage = () => {
             <Button
               type="submit"
               variant="primary"
-              className="w-full"
+              className="w-full focus:ring-2 focus:ring-primary focus:ring-offset-2"
               disabled={loading}
               loading={loading}
+              aria-describedby={loading ? 'signin-status' : undefined}
             >
               {loading ? 'Signing in...' : 'Sign in'}
             </Button>
+            
+            {loading && (
+              <div id="signin-status" className="sr-only" aria-live="polite">
+                Signing in, please wait...
+              </div>
+            )}
           </form>
 
           {/* Demo Credentials */}
-          <div className="mt-6 p-4 bg-surface-50 rounded-lg">
-            <p className="text-sm font-medium text-surface-700 mb-2">Demo Account:</p>
+          <div className="mt-6 p-4 bg-surface-50 rounded-lg" role="complementary" aria-labelledby="demo-account-heading">
+            <p id="demo-account-heading" className="text-sm font-medium text-surface-700 mb-2">Demo Account:</p>
             <p className="text-xs text-surface-600">
               Email: demo@example.com<br />
               Password: password
@@ -173,7 +189,7 @@ const LoginPage = () => {
               Don't have an account?{' '}
               <Link 
                 to="/signup" 
-                className="font-medium text-primary hover:text-secondary transition-colors"
+                className="font-medium text-primary hover:text-secondary focus:text-secondary focus:outline-none focus:underline transition-colors"
               >
                 Sign up
               </Link>
